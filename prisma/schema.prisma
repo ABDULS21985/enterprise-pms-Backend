@@ -1,0 +1,112 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Employee {
+  id                 Int      @id @default(autoincrement())
+  name               String
+  departmentId       Int
+  divisionId         Int
+  officeId           Int
+  performanceMetrics Json
+  department         Department @relation(fields: [departmentId], references: [id])
+  division           Division   @relation(fields: [divisionId], references: [id])
+  office             Office     @relation(fields: [officeId], references: [id])
+}
+
+model Department {
+  id        Int        @id @default(autoincrement())
+  name      String
+  divisions Division[]
+  employees Employee[] // Removed fields and references from here
+}
+
+model Division {
+  id          Int        @id @default(autoincrement())
+  name        String
+  departmentId Int
+  offices     Office[]
+  department  Department @relation(fields: [departmentId], references: [id])
+  employees   Employee[] // Removed fields and references from here
+}
+
+model Office {
+  id         Int        @id @default(autoincrement())
+  name       String
+  divisionId Int
+  employees  Employee[]
+  division   Division   @relation(fields: [divisionId], references: [id])
+}
+
+model User {
+  id                    String    @id @default(uuid())
+  userId                String    @unique
+  uniqueId              String    @unique
+  email                 String    @unique
+  firstName             String
+  lastName              String
+  jobTitle              String
+  department            String
+  division              String
+  office                String
+  location              String
+  password              String
+  dateOfHire            DateTime
+  dateOfTermination     DateTime?
+  refreshToken          String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+  middleName            String?
+  mobileNumber          String?
+  status                String?
+  supervisorId          String?
+  headOfOfficeId        String?
+  orgUnitId             Int?      // Add this field
+  roles                 UserRole[]
+  orgUnit               OrgUnit?  @relation(fields: [orgUnitId], references: [id])  // Update relation
+  auditLogs             AuditLog[]
+  logs                  Log[]
+  roleApprovalWorkflows RoleApprovalWorkflow[]
+}
+
+
+
+model UserRole {
+  id    Int    @id @default(autoincrement())
+  name  String
+  users User[]
+}
+
+model OrgUnit {
+  id        Int     @id @default(autoincrement())
+  name      String
+  users     User[]
+}
+
+model AuditLog {
+  id        Int      @id @default(autoincrement())
+  action    String
+  userId    String
+  timestamp DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+model Log {
+  id        Int      @id @default(autoincrement())
+  message   String
+  userId    String
+  timestamp DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+model RoleApprovalWorkflow {
+  id       Int      @id @default(autoincrement())
+  roleName String
+  userId   String
+  user     User     @relation(fields: [userId], references: [id])
+}

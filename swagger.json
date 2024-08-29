@@ -1,0 +1,510 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/": {
+      "get": {
+        "operationId": "AppController_getHello",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/users": {
+      "get": {
+        "operationId": "UserController_findAll",
+        "summary": "Get all users",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "users"
+        ]
+      },
+      "post": {
+        "operationId": "UserController_create",
+        "summary": "Create a new user",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUserDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "users"
+        ]
+      }
+    },
+    "/users/{id}": {
+      "get": {
+        "operationId": "UserController_findOne",
+        "summary": "Get a user by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "The ID of the user to retrieve",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "users"
+        ]
+      },
+      "put": {
+        "operationId": "UserController_update",
+        "summary": "Update an existing user",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "The ID of the user to update",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateUserDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "users"
+        ]
+      },
+      "delete": {
+        "operationId": "UserController_delete",
+        "summary": "Delete a user",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "The ID of the user to delete",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "users"
+        ]
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "operationId": "AuthController_login",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/auth/register": {
+      "post": {
+        "operationId": "AuthController_register",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/auth/profile": {
+      "post": {
+        "operationId": "AuthController_getProfile",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/auth/refresh-token": {
+      "post": {
+        "operationId": "AuthController_refreshToken",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RefreshTokenDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        }
+      }
+    }
+  },
+  "info": {
+    "title": "PMS API Documentation",
+    "description": "The PMS API description",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [
+    {
+      "name": "api",
+      "description": ""
+    }
+  ],
+  "servers": [],
+  "components": {
+    "schemas": {
+      "CreateUserDto": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "example": "user@example.com",
+            "description": "The email of the user"
+          },
+          "firstName": {
+            "type": "string",
+            "example": "John",
+            "description": "The first name of the user"
+          },
+          "lastName": {
+            "type": "string",
+            "example": "Doe",
+            "description": "The last name of the user"
+          },
+          "middleName": {
+            "type": "string",
+            "example": "Michael",
+            "description": "The middle name of the user"
+          },
+          "mobileNumber": {
+            "type": "string",
+            "example": "123-456-7890",
+            "description": "The mobile number of the user"
+          },
+          "department": {
+            "type": "string",
+            "example": "IT Department",
+            "description": "The department of the user"
+          },
+          "division": {
+            "type": "string",
+            "example": "Development Division",
+            "description": "The division of the user"
+          },
+          "office": {
+            "type": "string",
+            "example": "Lagos Office",
+            "description": "The office of the user"
+          },
+          "jobTitle": {
+            "type": "string",
+            "example": "Senior Software Engineer",
+            "description": "The job title of the user"
+          },
+          "location": {
+            "type": "string",
+            "example": "Victoria Island",
+            "description": "The location of the user"
+          },
+          "dateOfHire": {
+            "format": "date-time",
+            "type": "string",
+            "example": "2024-01-01",
+            "description": "The date of hire of the user"
+          },
+          "password": {
+            "type": "string",
+            "example": "password123",
+            "description": "The password of the user"
+          },
+          "status": {
+            "type": "string",
+            "example": "active",
+            "description": "The status of the user"
+          },
+          "supervisorId": {
+            "type": "string",
+            "example": "123456",
+            "description": "The supervisor ID of the user"
+          },
+          "headOfOfficeId": {
+            "type": "string",
+            "example": "789012",
+            "description": "The head of office ID of the user"
+          },
+          "orgUnitId": {
+            "type": "number",
+            "example": 1,
+            "description": "The organizational unit ID of the user"
+          }
+        },
+        "required": [
+          "email",
+          "firstName",
+          "lastName",
+          "department",
+          "division",
+          "office",
+          "jobTitle",
+          "location",
+          "dateOfHire",
+          "password"
+        ]
+      },
+      "UpdateUserDto": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "example": "user@example.com",
+            "description": "The email of the user"
+          },
+          "firstName": {
+            "type": "string",
+            "example": "John",
+            "description": "The first name of the user"
+          },
+          "lastName": {
+            "type": "string",
+            "example": "Doe",
+            "description": "The last name of the user"
+          },
+          "middleName": {
+            "type": "string",
+            "example": "Michael",
+            "description": "The middle name of the user"
+          },
+          "mobileNumber": {
+            "type": "string",
+            "example": "123-456-7890",
+            "description": "The mobile number of the user"
+          },
+          "department": {
+            "type": "string",
+            "example": "IT Department",
+            "description": "The department of the user"
+          },
+          "division": {
+            "type": "string",
+            "example": "Development Division",
+            "description": "The division of the user"
+          },
+          "office": {
+            "type": "string",
+            "example": "Lagos Office",
+            "description": "The office of the user"
+          },
+          "jobTitle": {
+            "type": "string",
+            "example": "Senior Software Engineer",
+            "description": "The job title of the user"
+          },
+          "location": {
+            "type": "string",
+            "example": "Victoria Island",
+            "description": "The location of the user"
+          },
+          "dateOfHire": {
+            "format": "date-time",
+            "type": "string",
+            "example": "2024-01-01",
+            "description": "The date of hire of the user"
+          },
+          "password": {
+            "type": "string",
+            "example": "password123",
+            "description": "The password of the user"
+          },
+          "status": {
+            "type": "string",
+            "example": "active",
+            "description": "The status of the user"
+          },
+          "supervisorId": {
+            "type": "string",
+            "example": "123456",
+            "description": "The supervisor ID of the user"
+          },
+          "headOfOfficeId": {
+            "type": "string",
+            "example": "789012",
+            "description": "The head of office ID of the user"
+          },
+          "orgUnitId": {
+            "type": "number",
+            "example": 1,
+            "description": "The organizational unit ID of the user"
+          }
+        }
+      },
+      "LoginDto": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "example": "drkatanga@gmail.com",
+            "description": "The email of the user"
+          },
+          "password": {
+            "type": "string",
+            "example": "password123",
+            "description": "The password of the user"
+          }
+        },
+        "required": [
+          "email",
+          "password"
+        ]
+      },
+      "RegisterDto": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "example": "drkatanga@gmail.com",
+            "description": "The email of the user"
+          },
+          "password": {
+            "type": "string",
+            "example": "password123",
+            "description": "The password of the user"
+          },
+          "firstName": {
+            "type": "string",
+            "example": "Shadrach",
+            "description": "The first name of the user"
+          },
+          "lastName": {
+            "type": "string",
+            "example": "Abdul",
+            "description": "The last name of the user"
+          },
+          "department": {
+            "type": "string",
+            "example": "IT Department",
+            "description": "The department of the user"
+          },
+          "division": {
+            "type": "string",
+            "example": "AMD",
+            "description": "The division of the user"
+          },
+          "office": {
+            "type": "string",
+            "example": "CSO",
+            "description": "The office of the user"
+          },
+          "jobTitle": {
+            "type": "string",
+            "example": "Senior Software Developer",
+            "description": "The job title of the user"
+          },
+          "location": {
+            "type": "string",
+            "example": "HQ",
+            "description": "The location of the user"
+          },
+          "dateOfHire": {
+            "format": "date-time",
+            "type": "string",
+            "example": "2024-01-01",
+            "description": "The date of hire of the user"
+          }
+        },
+        "required": [
+          "email",
+          "password",
+          "firstName",
+          "lastName",
+          "department",
+          "division",
+          "office",
+          "jobTitle",
+          "location",
+          "dateOfHire"
+        ]
+      },
+      "RefreshTokenDto": {
+        "type": "object",
+        "properties": {
+          "refreshToken": {
+            "type": "string",
+            "example": "refresh_token_here",
+            "description": "The refresh token"
+          }
+        },
+        "required": [
+          "refreshToken"
+        ]
+      }
+    }
+  }
+}
